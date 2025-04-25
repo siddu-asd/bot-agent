@@ -1,1 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    background: radial-gradient(circle at top left, #1e1b3a, #111);
+    /* margin: 0; */
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+
+  }
+  
