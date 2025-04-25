@@ -25,21 +25,23 @@
     font-size: 0.95rem;
   }
   
-  /* Flex container for image + chat */
+ 
   .chat-section {
     display: flex;
     align-items: flex-start;
     gap: 2rem;
+    align-items: center;
     margin-top: 2rem;
     justify-content: center;
   }
   
   /* Image styling */
   .image img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
+    width: 240px;
+    height: 270px;
+    border-radius: 12%;
     object-fit: cover;
+    align-items: center;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   }
   /* Chat box styles */
@@ -101,7 +103,7 @@
   /* Bot message aligned to the left */
   .message.bot {
     background: rgba(255, 255, 255, 0.1);
-    color: black;
+    color: rgb(255, 255, 255);
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     align-self: flex-start; /* Push to left */
@@ -135,4 +137,4 @@
     font-size: 1.2rem;
     cursor: pointer;
   }
-  
+  /* mic */

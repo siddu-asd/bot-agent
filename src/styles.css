@@ -1,6 +1,8 @@
 body {
-    background: radial-gradient(circle at top left, #1e1b3a, #111);
-    /* margin: 0; */
+    background-image: url("assets/bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover; /* Optional: makes the image cover the full container */
+    background-position: center;
     font-family: 'Segoe UI', sans-serif;
     color: white;
 
