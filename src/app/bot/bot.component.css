@@ -10,22 +10,22 @@
     box-shadow: 0 4px 40px rgba(0, 0, 0, 0.2);
     margin-top: 30px;
   }
-  
+
   .title {
     font-size: 2.5rem;
     font-weight: 800;
   }
-  
+
   .highlight {
     color: #a78bfa;
   }
-  
+
   .subtitle {
     margin: 1rem 0 2rem;
     color: #cbd5e1;
     font-size: 0.95rem;
   }
-  
+
   .chat-section {
     display: flex;
     align-items: flex-start;
@@ -34,7 +34,7 @@
     margin-top: 2rem;
     justify-content: center;
   }
-  
+
   /* Image styling */
   .image img {
     width: 240px;
@@ -44,7 +44,7 @@
     align-items: center;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   }
-  
+
   /* Chat box styles */
   .chat-window {
     flex: 1;
@@ -56,10 +56,10 @@
     display: flex;
     flex-direction: column;
   }
-  
+
   /* Messages area */
   .messages {
-    height: 400px; /* Set fixed height for the chat container */
+    height: 300px; /* Set fixed height for the chat container */
     overflow-y: auto; /* Enable vertical scrolling */
     margin-bottom: 1.5rem;
     text-align: left;
@@ -69,7 +69,7 @@
     gap: 1rem;
     padding-right: 10px; /* Optional: add some space for the scrollbar */
   }
-  
+
   /* Message styling */
   .message {
     margin-bottom: 1rem;
@@ -79,16 +79,16 @@
     display: inline-block;
     max-width: 80%;
   }
-  
+
   /* User message styling */
   .message.user {
     background: #4f46e5;
     color: white;
     align-self: flex-end; /* Align to right */
     text-align: right;
-   
+
   }
-  
+
   /* Bot message styling */
   .message.bot {
     background: rgba(255, 255, 255, 0.1);
@@ -99,7 +99,7 @@
     text-align: left;
 
   }
-  
+
   /* Input field styling */
   .input-area {
     display: flex;
@@ -109,7 +109,7 @@
     border-radius: 9999px;
     backdrop-filter: blur(10px);
   }
-  
+
   .input-area input {
     flex: 1;
     background: transparent;
@@ -118,7 +118,7 @@
     color: white;
     font-size: 1rem;
   }
-  
+
   .input-area button {
     background: transparent;
     border: none;
@@ -126,30 +126,29 @@
     font-size: 1.2rem;
     cursor: pointer;
   }
-  
-  
+
+
   .messages::-webkit-scrollbar {
     width: 2px; /* Adjust the width of the scrollbar */
   }
-  
+
   .messages::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.2); /* Semi-transparent scrollbar */
     border-radius: 1px;
   }
-  
+
   .messages::-webkit-scrollbar-track {
     background: #f1f1f1; /* Light background for scrollbar track */
   }
-  
+
   /* Scrollbar Smoothness */
   .messages {
-    scroll-behavior: smooth; 
+    scroll-behavior: smooth;
   }
-  
+
   /* Adjustments for microphone icon */
   .input-area button:first-child {
     font-size: 1.6rem; /* Increase size for microphone button */
     margin-right: 0.8rem; /* Add some space between mic and send button */
   }
-  
-  
+

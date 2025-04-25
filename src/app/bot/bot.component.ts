@@ -20,28 +20,55 @@ export class BotComponent implements OnInit {
   sessionId: string = '';
 
   ngOnInit() {
-    // Generate or retrieve session ID and send initial greeting
+    this.initializeSession();
+    this.showDefaultGreeting(); // Frontend-only welcome message
+  }
+
+  initializeSession() {
+    if (typeof window === 'undefined') return; // ✅ SSR guard
+
     const localSession = localStorage.getItem('sessionId');
+
     if (localSession) {
       this.sessionId = localSession;
-      this.sendMessageToBot('Hi'); // Initial greeting
+      console.log('Session ID restored:', this.sessionId);
     } else {
       this.http.get<{ session_id: string }>('https://chat-bot-raising100x.onrender.com/generate_session').subscribe({
         next: (response) => {
           this.sessionId = response.session_id;
           localStorage.setItem('sessionId', this.sessionId);
-          console.log('Generated session ID:', this.sessionId);
-          this.sendMessageToBot('Hi'); // Initial greeting
+          console.log('New session ID generated:', this.sessionId);
         },
         error: (err) => {
-          console.error('Failed to generate session ID:', err);
+          console.error('Error generating session ID:', err);
         }
       });
     }
   }
 
+  showDefaultGreeting() {
+    this.messages.push({
+      text: '👋 Hello! How can I help you today?',
+      sender: 'bot'
+    });
+  }
+
+  sendMessage() {
+    if (!this.userInput.trim()) return;
+
+    const userMessage = this.userInput.trim();
+    this.messages.push({ text: userMessage, sender: 'user' });
+    this.userInput = '';
+    this.sendMessageToBot(userMessage);
+  }
+
   sendMessageToBot(message: string) {
     this.loading = true;
+
+    // ⏳ Show "Typing..." placeholder
+    const typingPlaceholder: { text: string, sender: 'bot' } = { text: 'Typing...', sender: 'bot' };
+    this.messages.push(typingPlaceholder);
+    this.cdr.detectChanges();
 
     this.http.post<{ response: string }>('https://chat-bot-raising100x.onrender.com/chat', {
       message,
@@ -49,10 +76,24 @@ export class BotComponent implements OnInit {
     }).subscribe({
       next: (response) => {
         this.loading = false;
+
+        // 🧹 Remove "Typing..." placeholder
+        const index = this.messages.indexOf(typingPlaceholder);
+        if (index > -1) {
+          this.messages.splice(index, 1);
+        }
+
+        // ✍️ Animate bot response
         this.displayBotResponse(response.response);
       },
       error: (err) => {
         console.error('Bot error:', err);
+
+        const index = this.messages.indexOf(typingPlaceholder);
+        if (index > -1) {
+          this.messages.splice(index, 1);
+        }
+
         this.messages.push({ text: 'Oops! Something went wrong.', sender: 'bot' });
         this.loading = false;
         this.cdr.detectChanges();
@@ -60,38 +101,13 @@ export class BotComponent implements OnInit {
     });
   }
 
-  sendMessage() {
-    if (!this.userInput.trim()) return;
-
-    const userMessage = this.userInput;
-    this.messages.push({ text: userMessage, sender: 'user' });
-    this.userInput = '';
-    this.loading = true;
-
-    this.http.post<{ response: string }>('https://chat-bot-raising100x.onrender.com/chat', {
-      message: userMessage,
-      session_id: this.sessionId
-    }).subscribe({
-      next: (response) => {
-        this.loading = false;
-        this.displayBotResponse(response.response);
-      },
-      error: (err) => {
-        console.error('Send error:', err);
-        this.messages.push({ text: 'Sorry, something went wrong.', sender: 'bot' });
-        this.loading = false;
-        this.cdr.detectChanges();
-      }
-    });
-  }
-
   displayBotResponse(fullText: string) {
-    const typingMessage: { text: string, sender: 'user' | 'bot' } = { text: '', sender: 'bot' };
+    const typingMessage: { text: string, sender: 'bot' } = { text: '', sender: 'bot' };
     this.messages.push(typingMessage);
-  
+
     let index = 0;
     const typingSpeed = 40;
-  
+
     const typeChar = () => {
       if (index < fullText.length) {
         typingMessage.text += fullText.charAt(index++);
@@ -99,8 +115,8 @@ export class BotComponent implements OnInit {
         setTimeout(typeChar, typingSpeed);
       }
     };
-  
-    typeChar(); // Start typing effect
+
+    typeChar(); // Start animation
   }
 
   onKeyPress(event: KeyboardEvent) {
