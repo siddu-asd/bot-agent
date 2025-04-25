@@ -15,7 +15,7 @@
   
       <div class="chat-window">
         <div class="messages">
-          <div *ngFor="let msg of messages.slice(-2)" class="message" [ngClass]="msg.sender">
+          <div *ngFor="let msg of messages" class="message" [ngClass]="msg.sender">
             {{ msg.text }}
           </div>
         </div>

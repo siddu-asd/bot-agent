@@ -1,3 +1,4 @@
+/* Wrapper styling */
 .wrapper {
     text-align: center;
     padding: 4rem 1rem;
@@ -13,7 +14,7 @@
   .title {
     font-size: 2.5rem;
     font-weight: 800;
-  } 
+  }
   
   .highlight {
     color: #a78bfa;
@@ -25,7 +26,6 @@
     font-size: 0.95rem;
   }
   
- 
   .chat-section {
     display: flex;
     align-items: flex-start;
@@ -44,6 +44,7 @@
     align-items: center;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   }
+  
   /* Chat box styles */
   .chat-window {
     flex: 1;
@@ -52,17 +53,24 @@
     border-radius: 1.5rem;
     padding: 2rem 1.5rem;
     box-shadow: 0 4px 40px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
   }
   
   /* Messages area */
   .messages {
-    max-height: 250px;
-    overflow-y: auto;
+    height: 400px; /* Set fixed height for the chat container */
+    overflow-y: auto; /* Enable vertical scrolling */
     margin-bottom: 1.5rem;
     text-align: left;
-
+    -webkit-overflow-scrolling: touch; /* Ensures smooth scrolling on iOS */
+    display: flex;
+    flex-direction: column; /* Ensure messages are stacked vertically */
+    gap: 1rem;
+    padding-right: 10px; /* Optional: add some space for the scrollbar */
   }
   
+  /* Message styling */
   .message {
     margin-bottom: 1rem;
     padding: 0.8rem 1rem;
@@ -72,44 +80,26 @@
     max-width: 80%;
   }
   
-  .messages {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    max-height: 100%;
-    overflow-y: auto;
-    text-align: left;
-  }
-  
-  /* Common message styles */
-  .message {
-    padding: 0.8rem 1rem;
-    border-radius: 12px;
-    font-size: 0.95rem;
-    display: flex;
-    flex-direction: column;
-    max-width: 100%;
-  }
-
-  /* User message aligned to the right */
+  /* User message styling */
   .message.user {
     background: #4f46e5;
     color: white;
-    align-self: flex-end; /* Push to right */
+    align-self: flex-end; /* Align to right */
     text-align: right;
-    overflow-x: hidden;
+   
   }
   
-  /* Bot message aligned to the left */
+  /* Bot message styling */
   .message.bot {
     background: rgba(255, 255, 255, 0.1);
     color: rgb(255, 255, 255);
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    align-self: flex-start; /* Push to left */
+    align-self: flex-start; /* Align to left */
     text-align: left;
-    overflow-x: hidden;
+
   }
+  
   /* Input field styling */
   .input-area {
     display: flex;
@@ -118,7 +108,6 @@
     padding: 0.6rem 1rem;
     border-radius: 9999px;
     backdrop-filter: blur(10px);
- 
   }
   
   .input-area input {
@@ -137,4 +126,30 @@
     font-size: 1.2rem;
     cursor: pointer;
   }
-  /* mic */
+  
+  
+  .messages::-webkit-scrollbar {
+    width: 2px; /* Adjust the width of the scrollbar */
+  }
+  
+  .messages::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2); /* Semi-transparent scrollbar */
+    border-radius: 1px;
+  }
+  
+  .messages::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Light background for scrollbar track */
+  }
+  
+  /* Scrollbar Smoothness */
+  .messages {
+    scroll-behavior: smooth; 
+  }
+  
+  /* Adjustments for microphone icon */
+  .input-area button:first-child {
+    font-size: 1.6rem; /* Increase size for microphone button */
+    margin-right: 0.8rem; /* Add some space between mic and send button */
+  }
+  
+  
