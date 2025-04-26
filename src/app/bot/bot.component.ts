@@ -51,19 +51,19 @@ export class BotComponent implements OnInit, AfterViewInit {
   }
 
   initializeSession() {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined') return;  
 
     const localSession = localStorage.getItem('sessionId');
     if (localSession) {
       this.sessionId = localSession;
-      console.log('Retrieved session ID from localStorage:', this.sessionId);
+      // console.log('Retrieved session ID from localStorage:', this.sessionId);
     } else {
       this.http.get<{ session_id: string }>('https://chat-bot-raising100x.onrender.com/generate_session')
         .subscribe({
           next: (res) => {
             this.sessionId = res.session_id;
             localStorage.setItem('sessionId', this.sessionId);
-            console.log('Generated new session ID:', this.sessionId); 
+            // console.log('Generated new session ID:', this.sessionId); 
           },
           error: (err) => {
             console.error('Error generating session:', err);
@@ -73,7 +73,7 @@ export class BotComponent implements OnInit, AfterViewInit {
   }
 
   showDefaultGreeting() {
-    this.messages.push({ text: '👋 Hello! How can I help you today?', sender: 'bot' });
+    this.messages.push({ text: '👋 Hey there! Ready to dive into something amazing together?', sender: 'bot' });
     this.scrollToBottom();
   }
 
@@ -139,5 +139,30 @@ export class BotComponent implements OnInit, AfterViewInit {
     if (event.key === 'Enter') {
       this.sendMessage();
     }
+  }
+  startListening() {
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+  
+    if (!SpeechRecognition) {
+      alert('Speech recognition not supported in this browser.');
+      return;
+    }
+  
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+  
+    recognition.start();
+  
+    recognition.onresult = (event: any) => {
+      const transcript = event.results[0][0].transcript;
+      this.userInput = transcript;
+      this.cdr.detectChanges(); // Update UI with result
+    };
+  
+    recognition.onerror = (event: any) => {
+      console.error('Speech recognition error', event.error);
+    };
   }
 }
