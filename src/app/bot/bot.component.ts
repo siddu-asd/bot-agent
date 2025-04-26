@@ -1,7 +1,17 @@
-import { Component, OnInit, ChangeDetectorRef, inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectorRef,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+  inject
+} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { isPlatformBrowser } from '@angular/common';
+import { PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'app-bot',
@@ -10,113 +20,117 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule]
 })
-export class BotComponent implements OnInit {
+export class BotComponent implements OnInit, AfterViewInit {
   private http = inject(HttpClient);
   private cdr = inject(ChangeDetectorRef);
+  private platformId = inject(PLATFORM_ID);
 
   userInput = '';
   loading = false;
-  messages: { text: string, sender: 'user' | 'bot' }[] = [];
+  messages: { text: string; sender: 'user' | 'bot' }[] = [];
   sessionId: string = '';
+
+  @ViewChild('bottomAnchor') bottomAnchor!: ElementRef;
 
   ngOnInit() {
     this.initializeSession();
-    this.showDefaultGreeting(); // Frontend-only welcome message
+    this.showDefaultGreeting();
+  }
+
+  ngAfterViewInit() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom() {
+    // Ensure scroll only occurs in the browser
+    if (isPlatformBrowser(this.platformId) && this.bottomAnchor?.nativeElement instanceof HTMLElement) {
+      setTimeout(() => {
+        this.bottomAnchor.nativeElement.scrollIntoView({ behavior: 'smooth' });
+      }, 0);
+    }
   }
 
   initializeSession() {
-    if (typeof window === 'undefined') return; // ✅ SSR guard
+    if (typeof window === 'undefined') return;
 
     const localSession = localStorage.getItem('sessionId');
-
     if (localSession) {
       this.sessionId = localSession;
-      console.log('Session ID restored:', this.sessionId);
     } else {
-      this.http.get<{ session_id: string }>('https://chat-bot-raising100x.onrender.com/generate_session').subscribe({
-        next: (response) => {
-          this.sessionId = response.session_id;
-          localStorage.setItem('sessionId', this.sessionId);
-          console.log('New session ID generated:', this.sessionId);
-        },
-        error: (err) => {
-          console.error('Error generating session ID:', err);
-        }
-      });
+      this.http.get<{ session_id: string }>('https://chat-bot-raising100x.onrender.com/generate_session')
+        .subscribe({
+          next: (res) => {
+            this.sessionId = res.session_id;
+            localStorage.setItem('sessionId', this.sessionId);
+          },
+          error: (err) => {
+            console.error('Error generating session:', err);
+          }
+        });
     }
   }
 
   showDefaultGreeting() {
-    this.messages.push({
-      text: '👋 Hello! How can I help you today?',
-      sender: 'bot'
-    });
+    this.messages.push({ text: '👋 Hello! How can I help you today?', sender: 'bot' });
+    this.scrollToBottom();
   }
 
   sendMessage() {
     if (!this.userInput.trim()) return;
-
-    const userMessage = this.userInput.trim();
-    this.messages.push({ text: userMessage, sender: 'user' });
+    const userMsg = this.userInput.trim();
+    this.messages.push({ text: userMsg, sender: 'user' });
     this.userInput = '';
-    this.sendMessageToBot(userMessage);
+    this.scrollToBottom();
+    this.sendMessageToBot(userMsg);
   }
 
   sendMessageToBot(message: string) {
     this.loading = true;
 
-    // ⏳ Show "Typing..." placeholder
-    const typingPlaceholder: { text: string, sender: 'bot' } = { text: 'Typing...', sender: 'bot' };
-    this.messages.push(typingPlaceholder);
+    const typingMsg: { text: string; sender: 'bot' } = { text: 'Typing...', sender: 'bot' };
+    this.messages.push(typingMsg);
     this.cdr.detectChanges();
+    this.scrollToBottom();
 
     this.http.post<{ response: string }>('https://chat-bot-raising100x.onrender.com/chat', {
       message,
       session_id: this.sessionId
     }).subscribe({
-      next: (response) => {
+      next: (res) => {
         this.loading = false;
-
-        // 🧹 Remove "Typing..." placeholder
-        const index = this.messages.indexOf(typingPlaceholder);
-        if (index > -1) {
-          this.messages.splice(index, 1);
-        }
-
-        // ✍️ Animate bot response
-        this.displayBotResponse(response.response);
+        const idx = this.messages.indexOf(typingMsg);
+        if (idx > -1) this.messages.splice(idx, 1);
+        this.displayBotResponse(res.response);
       },
       error: (err) => {
         console.error('Bot error:', err);
-
-        const index = this.messages.indexOf(typingPlaceholder);
-        if (index > -1) {
-          this.messages.splice(index, 1);
-        }
-
-        this.messages.push({ text: 'Oops! Something went wrong.', sender: 'bot' });
         this.loading = false;
-        this.cdr.detectChanges();
+        const idx = this.messages.indexOf(typingMsg);
+        if (idx > -1) this.messages.splice(idx, 1);
+        this.messages.push({ text: 'Oops! Something went wrong.', sender: 'bot' });
+        this.scrollToBottom();
       }
     });
   }
 
   displayBotResponse(fullText: string) {
-    const typingMessage: { text: string, sender: 'bot' } = { text: '', sender: 'bot' };
-    this.messages.push(typingMessage);
+    const typing: { text: string; sender: 'bot' } = { text: '', sender: 'bot' };
+    this.messages.push(typing);
+    this.scrollToBottom();
 
-    let index = 0;
-    const typingSpeed = 40;
+    let i = 0;
+    const speed = 30;
 
-    const typeChar = () => {
-      if (index < fullText.length) {
-        typingMessage.text += fullText.charAt(index++);
+    const type = () => {
+      if (i < fullText.length) {
+        typing.text += fullText.charAt(i++);
         this.cdr.detectChanges();
-        setTimeout(typeChar, typingSpeed);
+        this.scrollToBottom();
+        setTimeout(type, speed);
       }
     };
 
-    typeChar(); // Start animation
+    type();
   }
 
   onKeyPress(event: KeyboardEvent) {

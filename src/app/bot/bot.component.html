@@ -18,8 +18,8 @@
           <div *ngFor="let msg of messages" class="message" [ngClass]="msg.sender">
             {{ msg.text }}
           </div>
+          <div #bottomAnchor></div>
         </div>
-        
   
         <div class="input-area">
           <input

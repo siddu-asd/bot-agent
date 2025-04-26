@@ -1,154 +1,144 @@
 /* Wrapper styling */
 .wrapper {
-    text-align: center;
-    padding: 4rem 1rem;
-    max-width: 900px;
-    margin: auto;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(12px);
-    border-radius: 1.5rem;
-    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.2);
-    margin-top: 30px;
-  }
+  text-align: center;
+  padding: 4rem 1rem;
+  max-width: 900px;
+  margin: auto;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.2);
+  margin-top: 30px;
+}
 
-  .title {
-    font-size: 2.5rem;
-    font-weight: 800;
-  }
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+}
 
-  .highlight {
-    color: #a78bfa;
-  }
+.highlight {
+  color: #a78bfa;
+}
 
-  .subtitle {
-    margin: 1rem 0 2rem;
-    color: #cbd5e1;
-    font-size: 0.95rem;
-  }
+.subtitle {
+  margin: 1rem 0 2rem;
+  color: #cbd5e1;
+  font-size: 0.95rem;
+}
 
-  .chat-section {
-    display: flex;
-    align-items: flex-start;
-    gap: 2rem;
-    align-items: center;
-    margin-top: 2rem;
-    justify-content: center;
-  }
+.chat-section {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  justify-content: center;
+}
 
-  /* Image styling */
-  .image img {
-    width: 240px;
-    height: 270px;
-    border-radius: 12%;
-    object-fit: cover;
-    align-items: center;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  }
+/* Image styling */
+.image img {
+  width: 240px;
+  height: 270px;
+  border-radius: 12%;
+  object-fit: cover;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
 
-  /* Chat box styles */
-  .chat-window {
-    flex: 1;
-    backdrop-filter: blur(12px);
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 1.5rem;
-    padding: 2rem 1.5rem;
-    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.4);
-    display: flex;
-    flex-direction: column;
-  }
+/* Chat box styles */
+.chat-window {
+  flex: 1;
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1.5rem;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+}
 
-  /* Messages area */
-  .messages {
-    height: 300px; /* Set fixed height for the chat container */
-    overflow-y: auto; /* Enable vertical scrolling */
-    margin-bottom: 1.5rem;
-    text-align: left;
-    -webkit-overflow-scrolling: touch; /* Ensures smooth scrolling on iOS */
-    display: flex;
-    flex-direction: column; /* Ensure messages are stacked vertically */
-    gap: 1rem;
-    padding-right: 10px; /* Optional: add some space for the scrollbar */
-  }
+/* Messages area */
+.messages {
+  height: 300px;
+  overflow-y: auto;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-right: 10px;
+  scroll-behavior: smooth;
+}
 
-  /* Message styling */
-  .message {
-    margin-bottom: 1rem;
-    padding: 0.8rem 1rem;
-    border-radius: 12px;
-    font-size: 0.95rem;
-    display: inline-block;
-    max-width: 80%;
-  }
+/* Message styling */
+.message {
+  margin-bottom: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  display: inline-block;
+  max-width: 80%;
+}
 
-  /* User message styling */
-  .message.user {
-    background: #4f46e5;
-    color: white;
-    align-self: flex-end; /* Align to right */
-    text-align: right;
+/* User message styling */
+.message.user {
+  background: #4f46e5;
+  color: white;
+  align-self: flex-end;
+  text-align: right;
+}
 
-  }
+/* Bot message styling */
+.message.bot {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  align-self: flex-start;
+  text-align: left;
+}
 
-  /* Bot message styling */
-  .message.bot {
-    background: rgba(255, 255, 255, 0.1);
-    color: rgb(255, 255, 255);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    align-self: flex-start; /* Align to left */
-    text-align: left;
+/* Input field styling */
+.input-area {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.6rem 1rem;
+  border-radius: 9999px;
+  backdrop-filter: blur(10px);
+}
 
-  }
+.input-area input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 1rem;
+}
 
-  /* Input field styling */
-  .input-area {
-    display: flex;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 0.6rem 1rem;
-    border-radius: 9999px;
-    backdrop-filter: blur(10px);
-  }
+.input-area button {
+  background: transparent;
+  border: none;
+  color: #a78bfa;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
 
-  .input-area input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: white;
-    font-size: 1rem;
-  }
+.input-area button:first-child {
+  font-size: 1.6rem;
+  margin-right: 0.8rem;
+}
 
-  .input-area button {
-    background: transparent;
-    border: none;
-    color: #a78bfa;
-    font-size: 1.2rem;
-    cursor: pointer;
-  }
+/* Scrollbar */
+.messages::-webkit-scrollbar {
+  width: 1px;
+}
 
+.messages::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 1px;
+}
 
-  .messages::-webkit-scrollbar {
-    width: 2px; /* Adjust the width of the scrollbar */
-  }
-
-  .messages::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2); /* Semi-transparent scrollbar */
-    border-radius: 1px;
-  }
-
-  .messages::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Light background for scrollbar track */
-  }
-
-  /* Scrollbar Smoothness */
-  .messages {
-    scroll-behavior: smooth;
-  }
-
-  /* Adjustments for microphone icon */
-  .input-area button:first-child {
-    font-size: 1.6rem; /* Increase size for microphone button */
-    margin-right: 0.8rem; /* Add some space between mic and send button */
-  }
-
+.messages::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
