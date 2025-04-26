@@ -37,7 +37,7 @@
 /* Image styling */
 .image img {
   width: 240px;
-  height: 270px;
+  height: 240px;
   border-radius: 12%;
   object-fit: cover;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
@@ -141,4 +141,14 @@
 
 .messages::-webkit-scrollbar-track {
   background: #f1f1f1;
+}
+.mic-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #444;
+}
+
+.mic-btn:hover {
+  color: #000;
 }

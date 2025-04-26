@@ -1,37 +1,47 @@
 <div class="wrapper">
-    <h1 class="title">
-      HEY <span class="highlight">I'M NISAA</span> HERE!
-    </h1>
-    <p class="subtitle">
-      Experience the power of AI with AICompanion—free to try, no commitment needed.
-      Start chatting now and discover seamless, intelligent assistance at your fingertips.
-    </p>
-  
-    <div class="chat-section">
-      <div class="image">
-        <img src="/assets/avathar.jpg" alt="Avatar" />
+  <h1 class="title">
+    HEY <span class="highlight">I'M NISAA</span> HERE!
+  </h1>
+  <p class="subtitle">
+    Experience the power of AI with AICompanion—free to try, no commitment needed.
+    Start chatting now and discover seamless, intelligent assistance at your fingertips.
+  </p>
 
+  <div class="chat-section">
+    <div class="image">
+      <img src="/assets/avathar.jpg" alt="Avatar" />
+    </div>
+
+    <div class="chat-window">
+      <div class="messages">
+        <div *ngFor="let msg of messages" class="message" [ngClass]="msg.sender">
+          {{ msg.text }}
+        </div>
+        <div #bottomAnchor></div>
       </div>
-  
-      <div class="chat-window">
-        <div class="messages">
-          <div *ngFor="let msg of messages" class="message" [ngClass]="msg.sender">
-            {{ msg.text }}
-          </div>
-          <div #bottomAnchor></div>
-        </div>
-  
-        <div class="input-area">
-          <input
-            [(ngModel)]="userInput"
-            (keypress)="onKeyPress($event)"
-            placeholder="Type something new..."
-          />
 
-          
-          <button (click)="sendMessage()">➤</button>
-        </div>
+      <div class="input-area">
+        <input
+          [(ngModel)]="userInput"
+          (keypress)="onKeyPress($event)"
+          placeholder="Type something new..."
+        />
+        <button class="mic-btn" (click)="startListening()" aria-label="Start voice input">
+          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="22"
+               viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+            <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"></path>
+            <path d="M19 10v2a7 7 0 01-14 0v-2"></path>
+            <line x1="12" y1="19" x2="12" y2="23"></line>
+            <line x1="8" y1="23" x2="16" y2="23"></line>
+          </svg>
+        </button>
+      
+      
+
+        <!-- Send message button -->
+        <button (click)="sendMessage()">➤</button>
       </div>
     </div>
   </div>
-  
+</div>
