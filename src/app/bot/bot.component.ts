@@ -56,14 +56,14 @@ export class BotComponent implements OnInit, AfterViewInit {
     const localSession = localStorage.getItem('sessionId');
     if (localSession) {
       this.sessionId = localSession;
-      // console.log('Retrieved session ID from localStorage:', this.sessionId);
+        
     } else {
       this.http.get<{ session_id: string }>('https://chat-bot-raising100x.onrender.com/generate_session')
         .subscribe({
           next: (res) => {
             this.sessionId = res.session_id;
             localStorage.setItem('sessionId', this.sessionId);
-            // console.log('Generated new session ID:', this.sessionId); 
+            console.log('Generated new session ID:', this.sessionId); 
           },
           error: (err) => {
             console.error('Error generating session:', err);
