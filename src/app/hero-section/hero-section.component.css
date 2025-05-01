@@ -345,7 +345,7 @@
 }
 
 /* MEDIA QUERY */
-@media (max-width: 768px) {
+@media (max-width:480px) {
   .nav {
     display: none;
   }
@@ -400,7 +400,7 @@
     bottom: 80px;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 480px) {
     .modal-content {
       position: static;
     }
