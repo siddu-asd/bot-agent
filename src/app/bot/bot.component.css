@@ -3,16 +3,16 @@
   text-align: center;
   padding: 4rem 1rem;
   max-width: 900px;
-  margin: auto;
+  margin: 30px auto 0;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);
   border-radius: 1.5rem;
   box-shadow: 0 4px 40px rgba(0, 0, 0, 0.2);
-  margin-top: 30px;
 }
 
+/* Title and subtitle */
 .title {
-  font-size: 2.5rem;
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
   font-weight: 800;
 }
 
@@ -23,29 +23,33 @@
 .subtitle {
   margin: 1rem 0 2rem;
   color: #cbd5e1;
-  font-size: 0.95rem;
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
 }
 
+/* Chat section layout */
 .chat-section {
   display: flex;
   align-items: center;
   gap: 2rem;
   margin-top: 2rem;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 /* Image styling */
 .image img {
-  width: 240px;
-  height: 240px;
+  width: clamp(160px, 30vw, 240px);
+  height: clamp(160px, 30vw, 240px);
   border-radius: 12%;
   object-fit: cover;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Chat box styles */
+/* Chat window */
 .chat-window {
-  flex: 1;
+  flex: 1 1 300px;
+  min-width: 260px;
+  max-width: 100%;
   backdrop-filter: blur(12px);
   background: rgba(255, 255, 255, 0.05);
   border-radius: 1.5rem;
@@ -61,15 +65,15 @@
   overflow-y: auto;
   margin-bottom: 1.5rem;
   text-align: left;
-  -webkit-overflow-scrolling: touch;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   padding-right: 10px;
   scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
-/* Message styling */
+/* Message bubbles */
 .message {
   margin-bottom: 1rem;
   padding: 0.8rem 1rem;
@@ -79,7 +83,7 @@
   max-width: 80%;
 }
 
-/* User message styling */
+/* User & bot messages */
 .message.user {
   background: #4f46e5;
   color: white;
@@ -87,7 +91,6 @@
   text-align: right;
 }
 
-/* Bot message styling */
 .message.bot {
   background: rgba(255, 255, 255, 0.1);
   color: white;
@@ -97,7 +100,7 @@
   text-align: left;
 }
 
-/* Input field styling */
+/* Input area */
 .input-area {
   display: flex;
   align-items: center;
@@ -129,6 +132,19 @@
   margin-right: 0.8rem;
 }
 
+/* Microphone button */
+.mic-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.2s ease;
+}
+
+.mic-btn:hover {
+  color: #fff;
+}
+
 /* Scrollbar */
 .messages::-webkit-scrollbar {
   width: 1px;
@@ -142,13 +158,49 @@
 .messages::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
-.mic-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #444;
+
+/* ---------- Responsive Media Queries ---------- */
+
+/* Small screens */
+@media (max-width: 768px) {
+  .chat-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .image img {
+    margin: 0 auto;
+  }
+
+  .chat-window {
+    padding: 1rem 1rem;
+    overflow: hidden;
+  }
+
+  .input-area {
+    padding: 0.5rem 0.8rem;
+  }
+
+  .wrapper {
+    padding: 2rem 1rem;
+  }
+
+  .messages {
+    height: 250px;
+  }
 }
 
-.mic-btn:hover {
-  color: #000;
+/* Extra small devices */
+@media (max-width: 480px) {
+  .messages {
+    height: 220px;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+  }
 }
