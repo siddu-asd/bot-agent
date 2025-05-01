@@ -432,7 +432,7 @@ body {
 }
 @media (max-width: 768px) {
   .close-button {
-    top: 60px; /* adjust for tablets and small laptops */
+    top: 70px; /* adjust for tablets and small laptops */
     right: 12px;
     font-size: 22px;
   }
@@ -440,7 +440,7 @@ body {
 
 @media (max-width: 480px) {
   .close-button {
-    top: 60px; /* mobile */
+    top: 70px; /* mobile */
     right: 10px;
     font-size: 20px;
   }
