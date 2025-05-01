@@ -325,8 +325,7 @@
   align-items: center;
 }
 
-.modal-content {
-  padding: 20px;
+.modal-content {    
   border-radius: 12px;
   max-height: 90vh;
   overflow-y: hidden;
