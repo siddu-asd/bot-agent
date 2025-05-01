@@ -1,10 +1,7 @@
 body {
-    background-image: url("assets/bg.jpg");
-    background-repeat: no-repeat;
-    background-size: cover; /* Optional: makes the image cover the full container */
-    background-position: center;
+ margin: 0px  ;
     font-family: 'Segoe UI', sans-serif;
     color: white;
-
+    overflow: hidden;
   }
     

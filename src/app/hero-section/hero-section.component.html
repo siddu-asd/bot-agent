@@ -1,0 +1,64 @@
+<header class="header">
+    <div class="logo">
+      <img src="assets/LOGO.png" alt="Company Logo" />
+    </div>
+  
+    <!-- Desktop Nav -->
+    <nav class="nav">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  
+    <!-- Hamburger Menu Icon (for mobile) -->
+    <div class="menu-icon" (click)="toggleMobileNav()">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </header>
+  
+  <!-- Mobile Navigation Overlay -->
+  <div class="mobile-nav-overlay" *ngIf="isMobileNavVisible">
+    <div class="close-mobile-nav" (click)="toggleMobileNav()">×</div>
+    <ul>
+      <li><a href="#home" (click)="toggleMobileNav()">Home</a></li>
+      <li><a href="#about" (click)="toggleMobileNav()">About Us</a></li>
+      <li><a href="#portfolio" (click)="toggleMobileNav()">Portfolio</a></li>
+      <li><a href="#contact" (click)="toggleMobileNav()">Contact</a></li>
+    </ul>
+  </div>
+  
+  
+  <div class="hero-container">
+    <div class="background">
+      <img src="assets/img.jpg" alt="Futuristic Background" class="background-img" />
+    </div>
+    <div class="overlay">
+      <div class="hero-text">
+        <h1 class="hero-title">Revolutionary Ideas<br><span class="highlight">Powering</span> Tomorrow</h1>
+        <p class="subtext">Your brand deserves to shine in the digital world. Let’s create the next big thing.</p>
+        <div class="cta-buttons">
+          <button class="cta primary">Unleash Creativity</button>
+          <button class="cta secondary">See Our Vision</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ✅ Use Angular event binding, not onclick="" -->
+  <div id="bot-icon" (click)="openBotModal()">
+    <img src="assets/bot_6569264.png" alt="Chatbot" />
+  </div>
+  
+  <!-- ✅ Show modal based on Angular state -->
+  <div *ngIf="isBotModalVisible" class="modal-overlay">
+    <div class="modal-content">
+      <span class="close-button" (click)="closeBotModal()">×</span>
+      <app-bot></app-bot> <!-- This now works -->
+    </div>
+  </div>
+  
