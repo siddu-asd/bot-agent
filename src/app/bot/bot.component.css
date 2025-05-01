@@ -164,8 +164,9 @@
 /* Small screens */
 @media (max-width: 768px) {
   .chat-section {
-    flex-direction: column;
+    flex-direction: row;
     align-items: stretch;
+    align-items: center;
   }
 
   .image img {
@@ -199,6 +200,7 @@
 
   .title {
     font-size: 1.8rem;
+    margin-top: 26px;
   }
 
   .subtitle {
