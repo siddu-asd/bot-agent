@@ -414,7 +414,7 @@ body {
   .cta-buttons {
     gap: 1.5rem;
   }
-  
+
 }
 
 /* Large Desktop - 1025px to 1440px */
@@ -428,5 +428,20 @@ body {
 @media (min-width: 1441px) {
   .cta-buttons {
     gap: 2.5rem;
+  }
+}
+@media (max-width: 768px) {
+  .close-button {
+    top: 60px; /* adjust for tablets and small laptops */
+    right: 12px;
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .close-button {
+    top: 60px; /* mobile */
+    right: 10px;
+    font-size: 20px;
   }
 }
