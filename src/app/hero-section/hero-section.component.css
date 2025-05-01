@@ -379,6 +379,9 @@ body {
     right: 2.5%;
     bottom: 80px;
   }
+  .logo img {
+    height: 40px;
+  }
 }
 
 /* Tablet - 481px to 768px */
@@ -401,6 +404,9 @@ body {
     right: 5%;
     bottom: 80px;
   }
+  .logo img {
+    height: 44px;
+  }
 }
 
 /* Small Desktop - 769px to 1024px */
@@ -408,6 +414,7 @@ body {
   .cta-buttons {
     gap: 1.5rem;
   }
+  
 }
 
 /* Large Desktop - 1025px to 1440px */
