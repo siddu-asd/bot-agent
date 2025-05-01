@@ -434,7 +434,7 @@ body {
   .close-button {
     top: 70px; /* adjust for tablets and small laptops */
     right: 12px;
-    font-size: 22px;
+    font-size: 24px;
   }
 }
 
@@ -442,6 +442,6 @@ body {
   .close-button {
     top: 70px; /* mobile */
     right: 10px;
-    font-size: 20px;
+    font-size: 24px;
   }
 }
