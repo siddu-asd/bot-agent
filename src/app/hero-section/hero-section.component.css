@@ -357,6 +357,71 @@ body {
   z-index: 3002;
 }
 
+#bot-container {
+  position: fixed;
+  bottom: 80px;
+  right: 70px;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  z-index: 1000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.bot-message {
+  background: linear-gradient(135deg, #e0f7fa, #ffffff);
+  color: #006064;
+  padding: 16px 20px;
+  border-radius: 20px 20px 20px 5px;
+  box-shadow: 0 10px 30px rgba(0, 96, 100, 0.15);
+  font-size: 15px;
+  max-width: 260px;
+  font-weight: 500;
+  position: relative;
+  animation: floatIn 0.6s ease-out;
+  transition: all 0.3s ease;
+}
+
+/* Optional tail for chat bubble */
+.bot-message::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 25px;
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
+  border-top-color: #e0f7fa;
+  filter: drop-shadow(0 -1px 1px rgba(0, 96, 100, 0.1));
+}
+
+
+#bot-icon {
+  cursor: pointer;
+}
+
+#bot-icon img {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+#bot-icon img:hover {
+  transform: scale(1.08);
+}
+
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* ---------- RESPONSIVE MEDIA QUERIES ---------- */
 
 /* Mobile - Up to 480px */
